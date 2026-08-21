@@ -33,13 +33,16 @@ body {
   background: var(--bg);
   color: var(--txt);
   min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
 }
 
 /* ── Header ── */
 .hdr {
   background: var(--hdr);
   color: #fff;
-  padding: 12px 14px;
+  padding: max(12px, env(safe-area-inset-top)) 14px 12px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -505,11 +508,81 @@ body {
 .empty-text { font-size: 0.84rem; }
 
 /* ── Mobile ── */
+@media (max-width: 600px) {
+  /* The header height can change on small phones, so avoid fixed sticky offsets. */
+  .prog-wrap,
+  .tabs {
+    position: static;
+  }
+
+  .hdr {
+    gap: 6px;
+  }
+
+  .hdr-title {
+    font-size: 0.9rem;
+    min-width: 0;
+  }
+
+  .main {
+    padding: 9px;
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+
+  .item-row {
+    display: grid;
+    grid-template-columns: 7px minmax(0, 1fr);
+    align-items: center;
+    gap: 7px 9px;
+    padding: 10px;
+  }
+
+  .item-name {
+    overflow-wrap: anywhere;
+    line-height: 1.35;
+  }
+
+  .item-btns {
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+    gap: 5px;
+  }
+
+  .ibtn {
+    min-height: 36px;
+    padding: 6px 4px;
+    justify-content: center;
+  }
+
+  .cat-head {
+    padding: 9px 10px;
+  }
+
+  .bulk-wrap {
+    flex-basis: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .bbtn {
+    min-height: 32px;
+  }
+
+  .home-summary {
+    gap: 6px 12px;
+    flex-wrap: wrap;
+  }
+}
+
 @media (max-width: 400px) {
-  .ibtn { padding: 5px 6px; font-size: 0.68rem; }
+  .ibtn { padding: 5px 3px; font-size: 0.68rem; }
   .bbtn { padding: 3px 7px; }
   .hbtn { padding: 5px 8px; font-size: 0.74rem; }
-  .item-row { padding: 9px 10px; gap: 7px; }
+  .hdr { padding-left: 9px; padding-right: 9px; }
+  .hdr-title { font-size: 0; }
+  .hdr-title svg { width: 20px; height: 20px; }
 }
 </style>
 </head>
